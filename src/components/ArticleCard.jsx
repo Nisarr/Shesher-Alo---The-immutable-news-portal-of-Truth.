@@ -26,7 +26,7 @@ const ArticleCard = ({ article }) => {
         <h3 style={styles.headline} className="bn-text">{article.headline}</h3>
         
         <div style={styles.orgInfo}>
-          <span style={styles.orgName}>{article.org_name}</span>
+          <span style={styles.orgName}>{article.organizations?.name || article.org_name}</span>
           <span style={{ ...styles.credBadge, color: cred.color }}>
             {cred.icon}
             {cred.label} ({article.credibility_score})

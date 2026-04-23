@@ -1,11 +1,11 @@
 import React from 'react';
-import { useMockData } from '../providers/MockProvider';
+import { useArticles } from '../providers/ArticleProvider';
 import ArticleCard from '../components/ArticleCard';
 import { ShieldCheck, BrainCircuit, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const { articles } = useMockData();
+  const { articles, loading } = useArticles();
   const publishedArticles = articles.filter(a => a.status === 'published');
 
   return (
@@ -64,10 +64,11 @@ const Home = () => {
           </div>
           
           <div style={styles.newsGrid}>
-            {publishedArticles.map(article => (
+            {loading && <p>Loading articles...</p>}
+            {!loading && publishedArticles.map(article => (
               <ArticleCard key={article.id} article={article} />
             ))}
-            {publishedArticles.length === 0 && (
+            {!loading && publishedArticles.length === 0 && (
               <p>No articles published yet.</p>
             )}
           </div>
